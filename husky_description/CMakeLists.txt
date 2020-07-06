@@ -4,7 +4,7 @@ project(husky_description)
 find_package(catkin REQUIRED COMPONENTS roslaunch)
 
 catkin_package()
-catkin_add_env_hooks(60.husky_custom_description SHELLS sh DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+catkin_add_env_hooks(60.env-hook SHELLS sh DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 roslaunch_add_file_check(launch)
 
 install(

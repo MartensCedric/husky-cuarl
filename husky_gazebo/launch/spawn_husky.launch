@@ -42,7 +42,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <group ns="$(arg robot_namespace)">
 
     <group if="$(arg multimaster)">
-      <include file="$(find husky_description)/launch/description.launch" >
+      <include file="$(find husky_cuarl)/husky_description/launch/description.launch" >
         <arg name="robot_namespace" value="$(arg robot_namespace)"/>
         <arg name="laser_enabled" default="$(arg laser_enabled)"/>
         <arg name="kinect_enabled" default="$(arg kinect_enabled)"/>
@@ -73,10 +73,10 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
     <!-- Additional nodes for specific accessories -->
     <group if="$(arg kinect_enabled)">
-      <include file="$(find husky_gazebo)/launch/kinect.launch" />
+      <include file="$(find husky_cuarl)/husky_gazebo/launch/kinect.launch" />
     </group>
     <group if="$(arg realsense_enabled)">
-      <include file="$(find husky_gazebo)/launch/realsense.launch" />
+      <include file="$(find husky_cuarl)/husky_gazebo/launch/realsense.launch" />
     </group>
 
     <!-- Spawn robot in gazebo -->

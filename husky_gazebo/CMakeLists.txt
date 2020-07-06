@@ -6,7 +6,7 @@ find_package(catkin REQUIRED COMPONENTS roslaunch)
 catkin_package()
 
 roslaunch_add_file_check(launch)
-catkin_add_env_hooks(60.env-hooks
+catkin_add_env_hooks(60.env-hook
     SHELLS sh DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 install(
