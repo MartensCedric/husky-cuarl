@@ -24,7 +24,6 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCL
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <launch>
-
   <arg name="multimaster" default="false"/>
 
   <arg name="robot_namespace" default="/"/>
@@ -37,12 +36,12 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <arg name="laser_enabled" default="$(optenv HUSKY_LMS1XX_ENABLED false)"/>
   <arg name="kinect_enabled" default="$(optenv HUSKY_KINECT_ENABLED false)"/>
   <arg name="realsense_enabled" default="$(optenv HUSKY_REALSENSE_ENABLED false)"/>
-  <arg name="urdf_extras" default="$(optenv HUSKY_URDF_EXTRAS)"/>
+  <arg name="urdf_extras" default="$(find husky_description)/urdf/custom_description.urdf.xacro"/>
 
   <group ns="$(arg robot_namespace)">
 
     <group if="$(arg multimaster)">
-      <include file="$(find husky_cuarl)/husky_description/launch/description.launch" >
+      <include file="$(find husky_description)/launch/description.launch" >
         <arg name="robot_namespace" value="$(arg robot_namespace)"/>
         <arg name="laser_enabled" default="$(arg laser_enabled)"/>
         <arg name="kinect_enabled" default="$(arg kinect_enabled)"/>
@@ -62,7 +61,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     <!-- For single master bringup, run robot control on the gazebo master -->
     <!-- Note that husky_description/description.launch is already included in husky_control/control.launch. -->
     <group unless="$(arg multimaster)">
-      <include file="$(find husky_control)/launch/control.launch">
+        <include file="$(find husky_control)/launch/control.launch">
         <arg name="multimaster" value="$(arg multimaster)"/>
         <arg name="laser_enabled" value="$(arg laser_enabled)"/>
         <arg name="kinect_enabled" value="$(arg kinect_enabled)"/>
@@ -73,10 +72,10 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
     <!-- Additional nodes for specific accessories -->
     <group if="$(arg kinect_enabled)">
-      <include file="$(find husky_cuarl)/husky_gazebo/launch/kinect.launch" />
+      <include file="$(find husky_gazebo)/launch/kinect.launch" />
     </group>
     <group if="$(arg realsense_enabled)">
-      <include file="$(find husky_cuarl)/husky_gazebo/launch/realsense.launch" />
+      <include file="$(find husky_gazebo)/launch/realsense.launch" />
     </group>
 
     <!-- Spawn robot in gazebo -->
